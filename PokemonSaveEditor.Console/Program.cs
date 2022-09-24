@@ -2,6 +2,7 @@
 namespace PokemonSaveEditor.Console
 {
     using PokemonSaveEditor.Libraries.Utils;
+    using PokemonSaveEditor.Libraries.Utils.DataModification;
     using System;
     public class Program
     {

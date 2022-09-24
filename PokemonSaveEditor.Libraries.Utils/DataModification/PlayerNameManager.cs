@@ -31,6 +31,25 @@ namespace PokemonSaveEditor.Libraries.Utils.DataModification
             return ram;
         }
 
+        public static string GetPlayerName(byte[] ram)
+        {
+            byte[] nameByteArray = new byte[11];
+            string name = string.Empty;
+            for (int i = PlayerNameRamOffset.Start; i < PlayerNameRamOffset.End; i++)
+            {
+                nameByteArray[i - PlayerNameRamOffset.Start] = ram[i];
+            }
+            foreach (var characterByte in nameByteArray)
+            {
+                var correspondingEntry = FrenchGermanCharacterEncoding.Characters.FirstOrDefault(k => k.Value == characterByte);
+                if (!string.IsNullOrEmpty(correspondingEntry.Key))
+                {
+                    name += correspondingEntry.Key;
+                }
+            }
+            return name;
+        }
+
         private static byte[] GetByteArray(string name)
         {
             var byteArray = new byte[11];
