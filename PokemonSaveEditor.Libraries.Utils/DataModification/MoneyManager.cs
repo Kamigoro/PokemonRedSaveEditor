@@ -29,6 +29,36 @@ namespace PokemonSaveEditor.Libraries.Utils
             return ram;
         }
 
+        public static int GetMoney(byte[] ram)
+        {
+            var moneyBytes = new byte[3];
+            for (int i = MoneyRamOffset.Start; i < MoneyRamOffset.End; i++)
+            {
+                moneyBytes[i - MoneyRamOffset.Start] = ram[i];
+            }
+
+            var digits = new int[6];
+            for (int i = 0; i < 6; i = i +2)
+            {
+                var digitsCombinedByte = moneyBytes[i/2];
+
+                var firstDigit = digitsCombinedByte >> 4;
+                var secondDigitByte = BitConverter.GetBytes(digitsCombinedByte << 4)[0];
+                var secondDigit = secondDigitByte >> 4;
+
+                digits[i] = firstDigit;
+                digits[i + 1] = secondDigit;
+            }
+
+            var numberString = string.Empty;
+            foreach (var digit in digits)
+            {
+                numberString = numberString + digit.ToString();
+            }
+
+            return Int32.Parse(numberString);
+        }
+
         /// <summary>
         /// Transform a integer into a byte array of 6, each byte containing a digit
         /// </summary>
