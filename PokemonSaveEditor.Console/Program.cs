@@ -2,9 +2,8 @@
 namespace PokemonSaveEditor.Console
 {
     using PokemonSaveEditor.Libraries.Utils;
-    using PokemonSaveEditor.Libraries.Utils.DataModification;
     using System;
-    class Program
+    public class Program
     {
         static int Main(string[] args)
         {
@@ -20,12 +19,10 @@ namespace PokemonSaveEditor.Console
 
             byte[] ram = File.ReadAllBytes(saveFilePath);
 
-            ram = PlayerNameManager.SetPlayerName("Benoit", ram);
-
             var newChecksum = RamChecksum.CalculateChecksum(ram);
             ram = RamChecksum.SetRamCheckSum(newChecksum, ram);
 
-            File.WriteAllBytes(saveFilePath.Replace("-backup.sav", ".sav"), ram);
+            File.WriteAllBytes(saveFilePath.Replace(".sav", $"-modified-{DateTime.UtcNow.ToShortTimeString}.sav"), ram);
 
             return 0;
         }
