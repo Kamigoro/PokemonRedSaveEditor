@@ -2,6 +2,7 @@
 namespace PokemonSaveEditor.Console
 {
     using PokemonSaveEditor.Libraries.Utils;
+    using PokemonSaveEditor.Libraries.Utils.DataModification;
     using System;
     class Program
     {
@@ -17,21 +18,14 @@ namespace PokemonSaveEditor.Console
                 return -1;
             }
 
-            Console.WriteLine("How much money do you want ?");
-            var moneyString = Console.ReadLine();
-            if(!Int32.TryParse(moneyString, out int money) || money > 999999)
-            {
-                Console.WriteLine("Text entered is either invalid or superior to 999999.");
-                return -1;
-            }
-            
             byte[] ram = File.ReadAllBytes(saveFilePath);
 
-            ram = MoneyManager.SetMoney(money, ram);
+            ram = PlayerNameManager.SetPlayerName("Benoit", ram);
+
             var newChecksum = RamChecksum.CalculateChecksum(ram);
             ram = RamChecksum.SetRamCheckSum(newChecksum, ram);
 
-            File.WriteAllBytes(saveFilePath, ram);
+            File.WriteAllBytes(saveFilePath.Replace("-backup.sav", ".sav"), ram);
 
             return 0;
         }

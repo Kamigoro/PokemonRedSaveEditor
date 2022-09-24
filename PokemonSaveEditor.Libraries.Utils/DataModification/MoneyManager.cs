@@ -12,6 +12,11 @@ namespace PokemonSaveEditor.Libraries.Utils
         /// <returns>The ram with the new money</returns>
         public static byte[] SetMoney(int money, byte[] ram)
         {
+            if(money > 999999 || money < 0 )
+            {
+                throw new ArgumentException("Money should be between 0 and 999 999 credits.");
+            }
+
             var moneyByteArray = GetByteForEachDigit(money);
 
             var moneyBytes = ReduceMoneyToThreeBytes(moneyByteArray);
