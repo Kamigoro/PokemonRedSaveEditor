@@ -2,7 +2,6 @@
 namespace PokemonSaveEditor.Console
 {
     using PokemonSaveEditor.Libraries.Utils;
-    using PokemonSaveEditor.Libraries.Utils.DataModification;
     using System;
     public class Program
     {
@@ -23,7 +22,7 @@ namespace PokemonSaveEditor.Console
             var newChecksum = RamChecksum.CalculateChecksum(ram);
             ram = RamChecksum.SetRamCheckSum(newChecksum, ram);
 
-            File.WriteAllBytes(saveFilePath.Replace(".sav", $"-modified-{DateTime.UtcNow.ToShortTimeString}.sav"), ram);
+            File.WriteAllBytes(saveFilePath, ram);
 
             return 0;
         }
