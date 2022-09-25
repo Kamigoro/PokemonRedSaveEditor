@@ -7,12 +7,12 @@ namespace PokemonSaveEditor.Libraries.Utils.DataModification
         /// <summary>
         /// Set hours and minutes played
         /// </summary>
-        /// <param name="ram"></param>
+        /// <param name="save"></param>
         /// <param name="hours"></param>
         /// <param name="minutes"></param>
-        /// <returns>Ram with the newly set hours and minutes</returns>
+        /// <returns>save with the newly set hours and minutes</returns>
         /// <exception cref="ArgumentOutOfRangeException">Hours is not between 0 and 255 or minutes are not between 0 and 59</exception>
-        public static byte[] SetPlayTime(byte[] ram,int hours, int minutes)
+        public static byte[] SetPlayTime(byte[] save,int hours, int minutes)
         {
             if (hours < 0 || hours > 255)
             {
@@ -26,21 +26,21 @@ namespace PokemonSaveEditor.Libraries.Utils.DataModification
             var hoursByte = BitConverter.GetBytes(hours)[0];
             var minutesByte = BitConverter.GetBytes(minutes)[0];
 
-            ram[HoursRamOffset.Start] = hoursByte;
-            ram[MinutesRamOffset.Start] = minutesByte;
+            save[HoursRamOffset.Start] = hoursByte;
+            save[MinutesRamOffset.Start] = minutesByte;
 
-            return ram;
+            return save;
         }
 
         /// <summary>
         /// Get the hours and minutes played
         /// </summary>
-        /// <param name="ram"></param>
+        /// <param name="save"></param>
         /// <returns>Time played hours and minutes</returns>
-        public static (int, int) GetPlayTime(byte[] ram)
+        public static (int, int) GetPlayTime(byte[] save)
         {
-            var hoursByte = ram[HoursRamOffset.Start];
-            var minutesByte = ram[MinutesRamOffset.Start];
+            var hoursByte = save[HoursRamOffset.Start];
+            var minutesByte = save[MinutesRamOffset.Start];
 
             return (hoursByte, minutesByte);
         } 

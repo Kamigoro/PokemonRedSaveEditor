@@ -8,10 +8,10 @@ namespace PokemonSaveEditor.Libraries.Utils
         /// Set the desired money
         /// </summary>
         /// <param name="money"></param>
-        /// <param name="ram"></param>
-        /// <returns>The ram with the new money</returns>
+        /// <param name="save"></param>
+        /// <returns>The save with the new money</returns>
         /// <exception cref="ArgumentException">Money wanted is not between 0 and 999 999</exception>
-        public static byte[] SetMoney(int money, byte[] ram)
+        public static byte[] SetMoney(int money, byte[] save)
         {
             if(money > 999999 || money < 0 )
             {
@@ -24,23 +24,23 @@ namespace PokemonSaveEditor.Libraries.Utils
             int counter = 0;
             for (int i = MoneyRamOffset.Start; i < MoneyRamOffset.End; i++)
             {
-                ram[i] = moneyBytes[counter];
+                save[i] = moneyBytes[counter];
                 counter++;
             }
-            return ram;
+            return save;
         }
 
         /// <summary>
-        /// Returns the money actually stored in ram
+        /// Returns the money actually stored in save
         /// </summary>
-        /// <param name="ram"></param>
+        /// <param name="save"></param>
         /// <returns>The player money</returns>
-        public static int GetMoney(byte[] ram)
+        public static int GetMoney(byte[] save)
         {
             var moneyBytes = new byte[3];
             for (int i = MoneyRamOffset.Start; i < MoneyRamOffset.End; i++)
             {
-                moneyBytes[i - MoneyRamOffset.Start] = ram[i];
+                moneyBytes[i - MoneyRamOffset.Start] = save[i];
             }
 
             var digits = ConvertThreeBytesToSixDigits(moneyBytes);

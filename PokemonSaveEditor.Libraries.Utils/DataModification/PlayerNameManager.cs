@@ -14,10 +14,10 @@ namespace PokemonSaveEditor.Libraries.Utils.DataModification
         /// Change the player's name
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="ram"></param>
-        /// <returns>The ram with the new player's name inside</returns>
+        /// <param name="save"></param>
+        /// <returns>The save with the new player's name inside</returns>
         /// <exception cref="ArgumentException">Name is empty or longer than 7 characters</exception>
-        public static byte[] SetPlayerName(string name, byte[] ram)
+        public static byte[] SetPlayerName(string name, byte[] save)
         {
             if(string.IsNullOrEmpty(name))
             {
@@ -32,24 +32,24 @@ namespace PokemonSaveEditor.Libraries.Utils.DataModification
 
             for (int i = PlayerNameRamOffset.Start; i < PlayerNameRamOffset.End; i++)
             {
-                ram[i] = nameByteArray[i-PlayerNameRamOffset.Start];
+                save[i] = nameByteArray[i-PlayerNameRamOffset.Start];
             }
 
-            return ram;
+            return save;
         }
 
         /// <summary>
-        /// Returns the player's name stored in ram
+        /// Returns the player's name stored in save
         /// </summary>
-        /// <param name="ram"></param>
+        /// <param name="save"></param>
         /// <returns>The player's name</returns>
-        public static string GetPlayerName(byte[] ram)
+        public static string GetPlayerName(byte[] save)
         {
             byte[] nameByteArray = new byte[11];
             string name = string.Empty;
             for (int i = PlayerNameRamOffset.Start; i < PlayerNameRamOffset.End; i++)
             {
-                nameByteArray[i - PlayerNameRamOffset.Start] = ram[i];
+                nameByteArray[i - PlayerNameRamOffset.Start] = save[i];
             }
             foreach (var characterByte in nameByteArray)
             {

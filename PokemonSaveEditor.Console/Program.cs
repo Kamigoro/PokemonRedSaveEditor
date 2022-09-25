@@ -17,12 +17,12 @@ namespace PokemonSaveEditor.Console
                 return -1;
             }
 
-            byte[] ram = File.ReadAllBytes(saveFilePath);
+            byte[] save = File.ReadAllBytes(saveFilePath);
 
-            var newChecksum = RamChecksum.CalculateChecksum(ram);
-            ram = RamChecksum.SetRamCheckSum(newChecksum, ram);
+            var newChecksum = RamChecksum.CalculateChecksum(save);
+            save = RamChecksum.SetRamCheckSum(newChecksum, save);
 
-            File.WriteAllBytes(saveFilePath, ram);
+            File.WriteAllBytes(saveFilePath, save);
 
             return 0;
         }
