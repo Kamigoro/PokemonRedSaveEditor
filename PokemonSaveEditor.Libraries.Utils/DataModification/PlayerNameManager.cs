@@ -10,6 +10,13 @@ namespace PokemonSaveEditor.Libraries.Utils.DataModification
 {
     public static class PlayerNameManager
     {
+        /// <summary>
+        /// Change the player's name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="ram"></param>
+        /// <returns>The ram with the new player's name inside</returns>
+        /// <exception cref="ArgumentException">Name is empty or longer than 7 characters</exception>
         public static byte[] SetPlayerName(string name, byte[] ram)
         {
             if(string.IsNullOrEmpty(name))
@@ -31,6 +38,11 @@ namespace PokemonSaveEditor.Libraries.Utils.DataModification
             return ram;
         }
 
+        /// <summary>
+        /// Returns the player's name stored in ram
+        /// </summary>
+        /// <param name="ram"></param>
+        /// <returns>The player's name</returns>
         public static string GetPlayerName(byte[] ram)
         {
             byte[] nameByteArray = new byte[11];

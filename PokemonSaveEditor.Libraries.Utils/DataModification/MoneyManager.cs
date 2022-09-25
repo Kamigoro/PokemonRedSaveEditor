@@ -10,6 +10,7 @@ namespace PokemonSaveEditor.Libraries.Utils
         /// <param name="money"></param>
         /// <param name="ram"></param>
         /// <returns>The ram with the new money</returns>
+        /// <exception cref="ArgumentException">Money wanted is not between 0 and 999 999</exception>
         public static byte[] SetMoney(int money, byte[] ram)
         {
             if(money > 999999 || money < 0 )
@@ -19,7 +20,7 @@ namespace PokemonSaveEditor.Libraries.Utils
 
             var moneyByteArray = GetByteForEachDigit(money);
 
-            var moneyBytes = ReduceMoneyToThreeBytes(moneyByteArray);
+            var moneyBytes = ConvertMoneyToThreeBytes(moneyByteArray);
             int counter = 0;
             for (int i = MoneyRamOffset.Start; i < MoneyRamOffset.End; i++)
             {
@@ -29,6 +30,11 @@ namespace PokemonSaveEditor.Libraries.Utils
             return ram;
         }
 
+        /// <summary>
+        /// Returns the money actually stored in ram
+        /// </summary>
+        /// <param name="ram"></param>
+        /// <returns>The player money</returns>
         public static int GetMoney(byte[] ram)
         {
             var moneyBytes = new byte[3];
@@ -37,18 +43,7 @@ namespace PokemonSaveEditor.Libraries.Utils
                 moneyBytes[i - MoneyRamOffset.Start] = ram[i];
             }
 
-            var digits = new int[6];
-            for (int i = 0; i < 6; i = i +2)
-            {
-                var digitsCombinedByte = moneyBytes[i/2];
-
-                var firstDigit = digitsCombinedByte >> 4;
-                var secondDigitByte = BitConverter.GetBytes(digitsCombinedByte << 4)[0];
-                var secondDigit = secondDigitByte >> 4;
-
-                digits[i] = firstDigit;
-                digits[i + 1] = secondDigit;
-            }
+            var digits = ConvertThreeBytesToSixDigits(moneyBytes);
 
             var numberString = string.Empty;
             foreach (var digit in digits)
@@ -90,7 +85,7 @@ namespace PokemonSaveEditor.Libraries.Utils
         /// </summary>
         /// <param name="digitsAsSingleByte"></param>
         /// <returns></returns>
-        private static byte[] ReduceMoneyToThreeBytes(byte[] digitsAsSingleByte)
+        private static byte[] ConvertMoneyToThreeBytes(byte[] digitsAsSingleByte)
         {
             //Trick to transform 2 * 8 bits integer
             //In a single byte integer
@@ -108,6 +103,29 @@ namespace PokemonSaveEditor.Libraries.Utils
             }
 
             return finalMoneyBytes.ToArray();
+        }
+
+        /// <summary>
+        /// Takes the 3 bytes representing money and convert them to an array of 6 digits.
+        /// </summary>
+        /// <param name="moneyStoredInRam"></param>
+        /// <returns>An array containing 6 integers representing digits</returns>
+        private static int[] ConvertThreeBytesToSixDigits(byte[] moneyStoredInRam)
+        {
+            var digits = new int[6];
+            for (int i = 0; i < 6; i = i + 2)
+            {
+                var digitsCombinedByte = moneyStoredInRam[i / 2];
+
+                var firstDigit = digitsCombinedByte >> 4;
+                var secondDigitByte = BitConverter.GetBytes(digitsCombinedByte << 4)[0];
+                var secondDigit = secondDigitByte >> 4;
+
+                digits[i] = firstDigit;
+                digits[i + 1] = secondDigit;
+            }
+
+            return digits;
         }
     }
 }

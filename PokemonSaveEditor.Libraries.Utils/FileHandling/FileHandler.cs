@@ -8,12 +8,17 @@
 
             if (!saveFilePath.EndsWith(".sav"))
             {
-                errorMessage = "Le chemin spécifié est incorrect.";
+                errorMessage = "Save file has not the good extension.";
                 return (false, errorMessage);
             }
             if (!File.Exists(saveFilePath))
             {
-                errorMessage = "Le chemin spécifié est incorrect.";
+                errorMessage = "Path does not exist.";
+                return (false, errorMessage);
+            }
+            if(File.ReadAllBytes(saveFilePath).Length != 32768)
+            {
+                errorMessage = "Save file size is incorrect.";
                 return (false, errorMessage);
             }
 
