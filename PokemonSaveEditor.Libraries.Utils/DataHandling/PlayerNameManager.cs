@@ -1,12 +1,7 @@
 ﻿using PokemonSaveEditor.Libraries.RamOffSet;
 using PokemonSaveEditor.Libraries.Text;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PokemonSaveEditor.Libraries.Utils.DataModification
+namespace PokemonSaveEditor.Libraries.Utils.DataHandling
 {
     public static class PlayerNameManager
     {

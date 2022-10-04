@@ -1,6 +1,6 @@
 ﻿using PokemonSaveEditor.Libraries.RamOffSet.PlayTime;
 
-namespace PokemonSaveEditor.Libraries.Utils.DataModification
+namespace PokemonSaveEditor.Libraries.Utils.DataHandling
 {
     public static class PlayTimeManager
     {

@@ -1,6 +1,6 @@
 ﻿using PokemonSaveEditor.Libraries.RamOffSet;
 
-namespace PokemonSaveEditor.Libraries.Utils
+namespace PokemonSaveEditor.Libraries.Utils.DataHandling
 {
     public static class MoneyManager
     {

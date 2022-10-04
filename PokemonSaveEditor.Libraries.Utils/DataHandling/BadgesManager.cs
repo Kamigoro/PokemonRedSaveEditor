@@ -1,7 +1,7 @@
 ﻿using PokemonSaveEditor.Libraries.Models;
 using PokemonSaveEditor.Libraries.RamOffSet;
 
-namespace PokemonSaveEditor.Libraries.Utils.DataModification
+namespace PokemonSaveEditor.Libraries.Utils.DataHandling
 {
     public static class BadgesManager
     {
