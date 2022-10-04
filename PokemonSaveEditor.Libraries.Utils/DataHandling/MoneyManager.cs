@@ -11,7 +11,7 @@ namespace PokemonSaveEditor.Libraries.Utils.DataHandling
         /// <param name="save"></param>
         /// <returns>The save with the new money</returns>
         /// <exception cref="ArgumentException">Money wanted is not between 0 and 999 999</exception>
-        public static byte[] SetMoney(int money, byte[] save)
+        public static byte[] SetMoney(byte[] save, int money)
         {
             if(money > 999999 || money < 0 )
             {

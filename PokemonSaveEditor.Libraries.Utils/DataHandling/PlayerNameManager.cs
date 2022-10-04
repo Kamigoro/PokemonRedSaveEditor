@@ -12,7 +12,7 @@ namespace PokemonSaveEditor.Libraries.Utils.DataHandling
         /// <param name="save"></param>
         /// <returns>The save with the new player's name inside</returns>
         /// <exception cref="ArgumentException">Name is empty or longer than 7 characters</exception>
-        public static byte[] SetPlayerName(string name, byte[] save)
+        public static byte[] SetPlayerName(byte[] save, string name)
         {
             if(string.IsNullOrEmpty(name))
             {
