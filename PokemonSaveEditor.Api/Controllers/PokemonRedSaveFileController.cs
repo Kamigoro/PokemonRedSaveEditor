@@ -30,6 +30,15 @@ namespace PokemonSaveEditor.Api.Controllers
                     {
                         await filestream.CopyToAsync(memoryStream);
                         var saveFileBytes = memoryStream.ToArray();
+
+                        //Check checksum
+                        var initialChecksum = RamChecksum.GetRamChecksum(saveFileBytes);
+                        var checksumCalculated = RamChecksum.CalculateChecksum(saveFileBytes);
+                        if(checksumCalculated != initialChecksum)
+                        {
+                            return BadRequest("File is not a valid save file.");
+                        }
+
                         return Ok(saveFileBytes.ToSaveFileData());
                     }
                 }
