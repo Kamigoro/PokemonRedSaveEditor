@@ -1,0 +1,63 @@
+.badges{
+    background-image: url("/assets/images/badges.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: flex;
+    min-height: 360px;
+    min-width: 800px;
+    margin-bottom: 20px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(10px, 150px);
+    grid-auto-columns: minmax(10px, 50px);;
+    justify-items: center;
+    align-items: center;
+}
+
+h1, .allApp, .saveButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rockBadge{
+    margin-top: 80%;
+    margin-left: 120%;
+}
+
+.waterBadge{
+    margin-top: 80%;
+    margin-left: 45%;
+}
+
+.electricBadge{
+    margin-top: 80%;
+    margin-left: -32%;
+}
+
+.grassBadge{
+    margin-top: 80%;
+    margin-left: -110%;
+}
+
+.poisonBadge{
+    margin-top: 50%;
+    margin-left: 120%;
+}
+
+.psychicBadge{
+    margin-top: 50%;
+    margin-left: 45%;
+}
+
+.fireBadge{
+    margin-top: 50%;
+    margin-left: -32%;
+}
+
+.groundType{
+    margin-top: 50%;
+    margin-left: -110%;
+}

@@ -1,0 +1,34 @@
+[
+    {
+        "type": "Rock",
+        "icon": "/assets/images/rockBadge.png"
+    },
+    {
+        "type": "Water",
+        "icon": "/assets/images/waterBadge.png"
+    },
+    {
+        "type": "Electric",
+        "icon": "/assets/images/electricBadge.png"
+    },
+    {
+        "type": "Grass",
+        "icon": "/assets/images/grassBadge.png"
+    },
+    {
+        "type": "Poison",
+        "icon": "/assets/images/poisonBadge.png"
+    },
+    {
+        "type": "Psychic",
+        "icon": "/assets/images/psychicBadge.png"
+    },
+    {
+        "type": "Fire",
+        "icon": "/assets/images/fireBadge.png"
+    },
+    {
+        "type": "Ground",
+        "icon": "/assets/images/groundType.png"
+    }
+]
