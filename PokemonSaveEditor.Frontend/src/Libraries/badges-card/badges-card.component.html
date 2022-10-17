@@ -1,0 +1,66 @@
+<p>badges-card works!</p>
+
+<div class="badges" id="badges">
+    <div *ngIf="badges$ | async as badgess">
+        <ul> 
+            <li *ngFor="let badge of badgess; let i = index">
+              {{ i + 1 }} - {{badge.Type}} - {{badge.Icon}}
+            </li>
+          </ul>
+      </div>
+
+    <div class="rockBadge">
+        <label>
+          <input type="checkbox" name="rockBadge" placeholder="rockBadge">
+          <img src="/assets/images/rockBadge.png" title="Rock badge" id="rockBadge"/>
+        </label>
+      </div>
+    <div class="rockBadge">
+      <label>
+        <input type="checkbox" name="rockBadge" placeholder="rockBadge">
+        <img src="/assets/images/rockBadge.png" title="Rock badge" id="rockBadge"/>
+      </label>
+    </div>
+    <div class="waterBadge">
+    <label>
+      <input type="checkbox" name="waterBadge" placeholder="waterBadge">
+      <img src="/assets/images/waterBadge.png" title="Water badge" id="waterBadge"/>
+    </label>
+    </div>
+    <div class="electricBadge">
+    <label>
+      <input type="checkbox" name="ElectricBadge" placeholder="ElectricBadge">
+      <img src="/assets/images/ElectricBadge.png" title="Electric badge"/>
+    </label>
+    </div>
+    <div class="grassBadge">
+    <label>
+      <input type="checkbox" name="grassBadge" placeholder="grassBadge">
+      <img src="/assets/images/grassBadge.png" title="Grass badge"/>
+    </label>
+    </div>
+    <div class="poisonBadge">
+    <label>
+      <input type="checkbox" name="poisonBadge" placeholder="poisonBadge">
+      <img src="/assets/images/poisonBadge.png" title="Poison badge"/>
+    </label>
+    </div>
+    <div class="psychicBadge">
+    <label>
+      <input type="checkbox" name="psychicBadge" placeholder="psychicBadge">
+      <img src="/assets/images/psychicBadge.png" title="Psychic badge"/>
+    </label>
+    </div>
+    <div class="fireBadge">
+    <label>
+      <input type="checkbox" name="fireBadge" placeholder="fireBadge">
+      <img src="/assets/images/fireBadge.png" title="Fire badge"/>
+    </label>
+    </div>
+    <div class="groundType">
+    <label>
+      <input type="checkbox" name="groundType" placeholder="groundType">
+      <img src="/assets/images/groundType.png" title="Ground badge"/>
+    </label>
+    </div>
+  </div>
