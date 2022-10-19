@@ -10,18 +10,14 @@ import { Badge } from './models/badge';
 })
 
 export class BadgesCardComponent implements OnInit {
-
-  Badges: Badge[] = [];
-
-  private badgeSubject = new BehaviorSubject<Badge[]>([]);
-
+  
   badges$: Observable<Badge[]> = new Observable;
 
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
     {
-      this.badges$ = this.httpClient.get<Badge[]>("assets/badges.json");
+      this.badges$ = this.httpClient.get<Badge[]>("../../assets/badges.json");
     }
   }
 
