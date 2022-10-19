@@ -1,13 +1,13 @@
 <p>badges-card works!</p>
 
 <div class="badges" id="badges">
-    <div *ngIf="badges$ | async as badgess">
-        <ul> 
-            <li *ngFor="let badge of badgess; let i = index">
-              {{ i + 1 }} - {{badge.Type}} - {{badge.Icon}}
+    <!-- <div *ngIf="badges$ | async as badgess"> -->
+        <!-- <ul>  -->
+            <li *ngFor="let badge of badges; let i = index">
+              {{ i + 1 }} - {{badge.type}} - {{badge.icon}}
             </li>
-          </ul>
-      </div>
+          <!-- </ul> -->
+      <!-- </div> -->
 
     <div class="rockBadge">
         <label>
