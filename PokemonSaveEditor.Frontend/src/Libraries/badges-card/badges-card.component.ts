@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { Badge } from './models/badge';
 
-import badgesData from '../../assets/badges.json';
-
 @Component({
   selector: 'app-badges-card',
   templateUrl: './badges-card.component.html',
@@ -12,20 +10,14 @@ import badgesData from '../../assets/badges.json';
 })
 
 export class BadgesCardComponent implements OnInit {
-
-  //badges: Badge[] = [];
-
-  //private badgeSubject = new BehaviorSubject<Badge[]>([]);
-  //private _jsonBadgesURL = 'assets/badges.json';
-
-  //badges$: Observable<Badge[]> = new Observable;
-  badges:{type:String,icon:String}[]=badgesData;
+  
+  badges$: Observable<Badge[]> = new Observable;
 
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
     {
-      //this.badges$ = this.httpClient.get<Badge[]>("../../assets/badges.json");
+      this.badges$ = this.httpClient.get<Badge[]>("../../assets/badges.json");
     }
   }
 

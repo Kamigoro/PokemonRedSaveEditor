@@ -1,12 +1,12 @@
 export class Badge {
 
     constructor(type: string, icon: string) {
-        this.Type = type;
-        this.Icon = icon;
+        this.type = type;
+        this.icon = icon;
     }
 
-    Type: string;
+    type: string;
 
-    Icon: string;
+    icon: string;
 
 }
