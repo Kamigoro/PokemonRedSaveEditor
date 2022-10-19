@@ -1,8 +1,9 @@
 import { NgModule } from "@angular/core";
-import { TrainerCardComponent } from "./trainer-card/trainer-card.component";
-import { BadgesCardComponent } from './badges-card/badges-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from "@angular/common";
+import { TrainerCardComponent } from "./trainer-card/trainer-card.component";
+import { BadgesCardComponent } from "./badges-card/badges-card.component";
+import { UploadFileComponent } from "./upload-file/upload-file/upload-file.component";
 
 @NgModule({
     imports: [
@@ -11,11 +12,13 @@ import { CommonModule } from "@angular/common";
     ],
     exports: [
         TrainerCardComponent,
-        BadgesCardComponent
+        BadgesCardComponent,
+        UploadFileComponent
     ],
     declarations: [
         TrainerCardComponent, 
-        BadgesCardComponent],
+        BadgesCardComponent, 
+        UploadFileComponent],
     providers: [],
  })
  
