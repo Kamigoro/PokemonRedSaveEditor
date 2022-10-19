@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PokemonSaveEditor.Libraries.Utils\PokemonSaveEditor.Libraries.Utils.csproj" />
   </ItemGroup>
 

@@ -9,9 +9,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonSaveEditor.Libraries
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonSaveEditor.Libraries", "PokemonSaveEditor.Libraries\PokemonSaveEditor.Libraries.csproj", "{5737BCE4-E651-4F63-8DF5-BF6DFC0D8B4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonSaveEditor.Api", "PokemonSaveEditor.Api\PokemonSaveEditor.Api.csproj", "{5BC1BCCF-807B-4968-BC7D-D0F121885A41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonSaveEditor.Api", "PokemonSaveEditor.Api\PokemonSaveEditor.Api.csproj", "{5BC1BCCF-807B-4968-BC7D-D0F121885A41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonSaveEditor.Api.Contracts", "PokemonSaveEditor.Api.Contracts\PokemonSaveEditor.Api.Contracts.csproj", "{601489CF-2276-4E97-A899-02D0186185C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonSaveEditor.Api.Contracts", "PokemonSaveEditor.Api.Contracts\PokemonSaveEditor.Api.Contracts.csproj", "{601489CF-2276-4E97-A899-02D0186185C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{027BC171-2A84-4A3B-ADE6-4B122A013B45}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
