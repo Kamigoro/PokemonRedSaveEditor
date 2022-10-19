@@ -4,6 +4,7 @@ using PokemonSaveEditor.Api.Contracts.Requests;
 using PokemonSaveEditor.Api.Routes;
 using PokemonSaveEditor.Libraries.Utils;
 using PokemonSaveEditor.Libraries.Utils.DataHandling;
+using System.Text;
 
 namespace PokemonSaveEditor.Api.Controllers
 {
@@ -12,10 +13,13 @@ namespace PokemonSaveEditor.Api.Controllers
     public class PokemonRedSaveFileController : ControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> GetSaveFileDataAsync(IFormFile file)
+        public async Task<IActionResult> GetSaveFileDataAsync(SaveFile saveFile)
         {
+            //Extract bytes from save file content
+            var saveFileBytes = Encoding.UTF8.GetBytes(saveFile.Content);
+
             //Checks on the save file
-            var (success, errorMessage) = FileHandler.ValidateSaveFile(file);
+            var (success, errorMessage) = FileHandler.ValidateSaveFile(saveFileBytes);
             if (!success)
             {
                 return BadRequest(errorMessage);
@@ -24,25 +28,9 @@ namespace PokemonSaveEditor.Api.Controllers
             //Converting file into byte array and extracting data
             try
             {
-                using (var filestream = file.OpenReadStream())
-                {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await filestream.CopyToAsync(memoryStream);
-                        var saveFileBytes = memoryStream.ToArray();
-
-                        //Check checksum
-                        var initialChecksum = RamChecksum.GetRamChecksum(saveFileBytes);
-                        var checksumCalculated = RamChecksum.CalculateChecksum(saveFileBytes);
-                        if(checksumCalculated != initialChecksum)
-                        {
-                            return BadRequest("File is not a valid save file.");
-                        }
-
-                        return Ok(saveFileBytes.ToSaveFileData());
-                    }
-                }
-            }catch (Exception ex)
+                return Ok(saveFileBytes.ToSaveFileData());
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }            
@@ -51,34 +39,25 @@ namespace PokemonSaveEditor.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> SetNewFileDataAsync(UpdateSaveFileRequest updateSaveFileRequest)
         {
+            //Extract bytes from save file content
+            var saveFileBytes = Encoding.UTF8.GetBytes(updateSaveFileRequest.SaveFile.Content);
+
             //Checks on the save file
-            var (success, errorMessage) = FileHandler.ValidateSaveFile(updateSaveFileRequest.SaveFile);
+            var (success, errorMessage) = FileHandler.ValidateSaveFile(saveFileBytes);
             if (!success)
             {
                 return BadRequest(errorMessage);
             }
 
-            //Extract bytes from save file
-            byte[] saveFileBytes;
-            var newData = updateSaveFileRequest.NewData;
-            using (var filestream = updateSaveFileRequest.SaveFile.OpenReadStream())
-            {
-                using (var memoryStream = new MemoryStream())
-                {
-                    await filestream.CopyToAsync(memoryStream);
-                    saveFileBytes = memoryStream.ToArray();
-                }
-            }
-
             ///TODO Refactor this in a single method
-            saveFileBytes = BadgesManager.SetBadgesCollection(saveFileBytes, newData.Badges);
-            saveFileBytes = PlayerNameManager.SetPlayerName(saveFileBytes, newData.PlayerName);
-            saveFileBytes = PlayTimeManager.SetPlayTime(saveFileBytes, newData.Hours, newData.Minutes);
-            saveFileBytes = MoneyManager.SetMoney(saveFileBytes, newData.Money);
+            saveFileBytes = BadgesManager.SetBadgesCollection(saveFileBytes, updateSaveFileRequest.NewData.Badges);
+            saveFileBytes = PlayerNameManager.SetPlayerName(saveFileBytes, updateSaveFileRequest.NewData.PlayerName);
+            saveFileBytes = PlayTimeManager.SetPlayTime(saveFileBytes, updateSaveFileRequest.NewData.Hours, updateSaveFileRequest.NewData.Minutes);
+            saveFileBytes = MoneyManager.SetMoney(saveFileBytes, updateSaveFileRequest.NewData.Money);
             var newChecksum = RamChecksum.CalculateChecksum(saveFileBytes);
             saveFileBytes = RamChecksum.SetRamCheckSum(newChecksum, saveFileBytes);
 
-            return File(saveFileBytes, "application/octet-stream", updateSaveFileRequest.SaveFile.FileName);
+            return File(saveFileBytes, "application/octet-stream", updateSaveFileRequest.SaveFile.Name);
         }
     }
 }

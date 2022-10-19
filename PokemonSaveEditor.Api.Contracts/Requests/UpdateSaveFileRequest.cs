@@ -1,17 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using PokemonSaveEditor.Api.Contracts.Responses;
-using PokemonSaveEditor.Api.ModelBinding;
+﻿using PokemonSaveEditor.Api.Contracts.Responses;
 using System.ComponentModel.DataAnnotations;
 
 namespace PokemonSaveEditor.Api.Contracts.Requests
 {
-    [ModelBinder(typeof(JsonWithFilesFormDataModelBinder), Name = "json")]
     public class UpdateSaveFileRequest
     {
+        /// <summary>
+        /// The data the player want to be applied to his save file
+        /// </summary>
         [Required]
         public SaveFileDataResponse NewData { get; set; }
+
+        /// <summary>
+        /// Data regarding the save file
+        /// </summary>
         [Required]
-        public IFormFile SaveFile { get; set; }
+        public SaveFile SaveFile { get; set; }
     }
 }
