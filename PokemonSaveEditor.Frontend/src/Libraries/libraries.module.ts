@@ -4,6 +4,7 @@ import { CommonModule } from "@angular/common";
 import { TrainerCardComponent } from "./trainer-card/trainer-card.component";
 import { BadgesCardComponent } from "./badges-card/badges-card.component";
 import { UploadFileComponent } from "./upload-file/upload-file/upload-file.component";
+import { FormComponent } from "src/app/form/form.component";
 
 @NgModule({
     imports: [
@@ -13,12 +14,15 @@ import { UploadFileComponent } from "./upload-file/upload-file/upload-file.compo
     exports: [
         TrainerCardComponent,
         BadgesCardComponent,
-        UploadFileComponent
+        UploadFileComponent,
+        FormComponent
     ],
     declarations: [
         TrainerCardComponent, 
         BadgesCardComponent, 
-        UploadFileComponent],
+        UploadFileComponent,
+        FormComponent
+    ],
     providers: [],
  })
  
