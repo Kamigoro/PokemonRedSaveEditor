@@ -9,7 +9,7 @@ namespace PokemonSaveEditor.Api.Contracts.Requests
         /// The data the player want to be applied to his save file
         /// </summary>
         [Required]
-        public SaveFileDataResponse NewData { get; set; }
+        public SaveFileDataContent NewData { get; set; }
 
         /// <summary>
         /// Data regarding the save file

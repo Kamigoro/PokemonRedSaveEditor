@@ -1,6 +1,6 @@
 ﻿namespace PokemonSaveEditor.Libraries.Text
 {
-    public class FrenchGermanCharacterEncoding
+    public static class FrenchGermanCharacterEncoding
     {
         public static Dictionary<string, byte> Characters = new Dictionary<string, byte>()
         {

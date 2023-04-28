@@ -5,13 +5,13 @@ namespace PokemonSaveEditor.Libraries.Utils.DataHandling
     public static class MoneyManager
     {
         /// <summary>
-        /// Set the desired money
+        /// Set the desired amount of money for the player.
         /// </summary>
-        /// <param name="money"></param>
-        /// <param name="save"></param>
-        /// <returns>The save with the new money</returns>
-        /// <exception cref="ArgumentException">Money wanted is not between 0 and 999 999</exception>
-        public static byte[] SetMoney(byte[] save, int money)
+        /// <param name="save">The save file to modify.</param>
+        /// <param name="money">The amount of money to set, between 0 and 999,999.</param>
+        /// <returns>The modified save file.</returns>
+        /// <exception cref="ArgumentException">Thrown if the specified amount of money is not between 0 and 999,999.</exception>
+        public static byte[] SetMoney(ref byte[] save, int money)
         {
             if(money > 999999 || money < 0 )
             {
@@ -31,10 +31,10 @@ namespace PokemonSaveEditor.Libraries.Utils.DataHandling
         }
 
         /// <summary>
-        /// Returns the money actually stored in save
+        /// Get the current amount of money the player has.
         /// </summary>
-        /// <param name="save"></param>
-        /// <returns>The player money</returns>
+        /// <param name="save">The save file to check.</param>
+        /// <returns>The amount of money the player has.</returns>
         public static int GetMoney(byte[] save)
         {
             var moneyBytes = new byte[3];
@@ -55,10 +55,10 @@ namespace PokemonSaveEditor.Libraries.Utils.DataHandling
         }
 
         /// <summary>
-        /// Transform a integer into a byte array of 6, each byte containing a digit
+        /// Converts an integer into a byte array of six, where each byte contains a digit.
         /// </summary>
-        /// <param name="money"></param>
-        /// <returns></returns>
+        /// <param name="money">The integer to convert.</param>
+        /// <returns>A byte array of six bytes, each representing a digit.</returns>
         private static byte[] GetByteForEachDigit(int money)
         {
             var moneyString = money.ToString();
@@ -81,10 +81,10 @@ namespace PokemonSaveEditor.Libraries.Utils.DataHandling
         }
 
         /// <summary>
-        /// Convert a 6 digit byte array into 3 bytes, each digit is 4 bits
+        /// Converts a byte array of six digits into three bytes, where each digit takes up four bits of a byte.
         /// </summary>
-        /// <param name="digitsAsSingleByte"></param>
-        /// <returns></returns>
+        /// <param name="digitsAsSingleByte">The byte array of six digits.</param>
+        /// <returns>A byte array of three bytes.</returns>
         private static byte[] ConvertMoneyToThreeBytes(byte[] digitsAsSingleByte)
         {
             //Trick to transform 2 * 8 bits integer
@@ -106,10 +106,10 @@ namespace PokemonSaveEditor.Libraries.Utils.DataHandling
         }
 
         /// <summary>
-        /// Takes the 3 bytes representing money and convert them to an array of 6 digits.
+        /// Takes the three bytes representing the player's money and converts them to an array of six digits.
         /// </summary>
-        /// <param name="moneyStoredInRam"></param>
-        /// <returns>An array containing 6 integers representing digits</returns>
+        /// <param name="moneyStoredInRam">The three bytes representing the player's money.</param>
+        /// <returns>An array containing six integers representing digits.</returns>
         private static int[] ConvertThreeBytesToSixDigits(byte[] moneyStoredInRam)
         {
             var digits = new int[6];

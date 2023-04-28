@@ -1,6 +1,6 @@
 ﻿namespace PokemonSaveEditor.Api.Routes
 {
-    public static class PokemonRedRoutes
+    public static class PokemonRedApiRoutes
     {
         public const string Base = "api/red";
     }

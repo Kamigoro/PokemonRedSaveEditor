@@ -3,25 +3,28 @@ using PokemonSaveEditor.Libraries.RamOffSet;
 
 namespace PokemonSaveEditor.Libraries.Utils.DataHandling
 {
+    /// <summary>
+    /// Provides methods for working with badge collections in a save file.
+    /// </summary>
     public static class BadgesManager
     {
         /// <summary>
-        /// Set the specified badges in ram
+        /// Sets the specified badge collection in the save file.
         /// </summary>
-        /// <param name="save"></param>
-        /// <param name="badgeCollection"></param>
-        /// <returns>The save with the specified badge collection</returns>
-        public static byte[] SetBadgesCollection(byte[] save, BadgeCollection badgeCollection)
+        /// <param name="save">The save file.</param>
+        /// <param name="badgeCollection">The badge collection to set in the save file.</param>
+        /// <returns>The updated save file.</returns>
+        public static byte[] SetBadgesCollection(ref byte[] save, BadgeCollection badgeCollection)
         {
             save[BadgesRamOffset.Start] = ConvertBadgeCollectionToByte(badgeCollection);
             return save;
         }
 
         /// <summary>
-        /// Returns the badge collections in the save
+        /// Returns the badge collection stored in the save file.
         /// </summary>
-        /// <param name="save"></param>
-        /// <returns>The badge collection stored in save</returns>
+        /// <param name="save">The save file.</param>
+        /// <returns>The badge collection stored in the save file.</returns>
         public static BadgeCollection GetBadgesCollection(byte[] save)
         {
             var badgesCollectionByte = save[BadgesRamOffset.Start];
@@ -29,10 +32,10 @@ namespace PokemonSaveEditor.Libraries.Utils.DataHandling
         }
 
         /// <summary>
-        /// Takes all the badges and convert them to a single byte
+        /// Takes all the badges and converts them to a single byte.
         /// </summary>
-        /// <param name="badgeCollection"></param>
-        /// <returns>A byte representing all the badges earned</returns>
+        /// <param name="badgeCollection">The badge collection to convert to a byte.</param>
+        /// <returns>A byte representing all the badges earned.</returns>
         private static byte ConvertBadgeCollectionToByte(BadgeCollection badgeCollection)
         {
             var boulderByte = BitConverter.GetBytes(Convert.ToByte(badgeCollection.Boulder) << 7)[0];
@@ -48,10 +51,10 @@ namespace PokemonSaveEditor.Libraries.Utils.DataHandling
         }
 
         /// <summary>
-        /// Convert the byte containing the badges into a BadgeCollection
+        /// Converts the byte containing the badges into a BadgeCollection.
         /// </summary>
-        /// <param name="badgeCollectionByte"></param>
-        /// <returns>The badge collection</returns>
+        /// <param name="badgeCollectionByte">The byte containing the badges.</param>
+        /// <returns>The badge collection corresponding to the byte.</returns>
         private static BadgeCollection ConvertByteToBadgeCollection(byte badgeCollectionByte)
         {
             var badges = new bool[8];

@@ -8,12 +8,20 @@ using System.Text;
 
 namespace PokemonSaveEditor.Api.Controllers
 {
-    [Route(PokemonRedRoutes.Base)]
+    /// <summary>
+    /// Controller for managing Pokemon Red save files.
+    /// </summary>
+    [Route(PokemonRedApiRoutes.Base)]
     [ApiController]
     public class PokemonRedSaveFileController : ControllerBase
     {
+        /// <summary>
+        /// Returns the data extracted from a Pokemon Red save file.
+        /// </summary>
+        /// <param name="saveFile">The save file object containing the save file content.</param>
+        /// <returns>The extracted save file data.</returns>
         [HttpGet]
-        public async Task<IActionResult> GetSaveFileDataAsync(SaveFile saveFile)
+        public IActionResult GetSaveFileData(SaveFile saveFile)
         {
             //Extract bytes from save file content
             var saveFileBytes = Encoding.UTF8.GetBytes(saveFile.Content);
@@ -36,8 +44,13 @@ namespace PokemonSaveEditor.Api.Controllers
             }            
         }
 
+        /// <summary>
+        /// Updates a Pokemon Red save file with new data.
+        /// </summary>
+        /// <param name="updateSaveFileRequest">The request object containing the save file and new data.</param>
+        /// <returns>The updated save file.</returns>
         [HttpPost]
-        public async Task<IActionResult> SetNewFileDataAsync(UpdateSaveFileRequest updateSaveFileRequest)
+        public IActionResult UpdateSaveFile(UpdateSaveFileRequest updateSaveFileRequest)
         {
             //Extract bytes from save file content
             var saveFileBytes = Encoding.UTF8.GetBytes(updateSaveFileRequest.SaveFile.Content);
@@ -49,15 +62,23 @@ namespace PokemonSaveEditor.Api.Controllers
                 return BadRequest(errorMessage);
             }
 
-            ///TODO Refactor this in a single method
-            saveFileBytes = BadgesManager.SetBadgesCollection(saveFileBytes, updateSaveFileRequest.NewData.Badges);
-            saveFileBytes = PlayerNameManager.SetPlayerName(saveFileBytes, updateSaveFileRequest.NewData.PlayerName);
-            saveFileBytes = PlayTimeManager.SetPlayTime(saveFileBytes, updateSaveFileRequest.NewData.Hours, updateSaveFileRequest.NewData.Minutes);
-            saveFileBytes = MoneyManager.SetMoney(saveFileBytes, updateSaveFileRequest.NewData.Money);
-            var newChecksum = RamChecksum.CalculateChecksum(saveFileBytes);
-            saveFileBytes = RamChecksum.SetRamCheckSum(newChecksum, saveFileBytes);
+            SetNewFileData(updateSaveFileRequest, ref saveFileBytes);
 
             return File(saveFileBytes, "application/octet-stream", updateSaveFileRequest.SaveFile.Name);
+        }
+
+        /// <summary>
+        /// Sets new data in a Pokemon Red save file based on the update request.
+        /// </summary>
+        /// <param name="updateSaveFileRequest">The update request object containing the new data to apply to the save file.</param>
+        /// <param name="saveFileBytes">A reference to the byte array containing the save file data.</param>
+        private static void SetNewFileData(UpdateSaveFileRequest updateSaveFileRequest, ref byte[] saveFileBytes)
+        {
+            BadgesManager.SetBadgesCollection(ref saveFileBytes, updateSaveFileRequest.NewData.Badges);
+            PlayerNameManager.SetPlayerName(ref saveFileBytes, updateSaveFileRequest.NewData.PlayerName);
+            PlayTimeManager.SetPlayTime(ref saveFileBytes, updateSaveFileRequest.NewData.Hours, updateSaveFileRequest.NewData.Minutes);
+            MoneyManager.SetMoney(ref saveFileBytes, updateSaveFileRequest.NewData.Money);
+            RamChecksum.SetRamCheckSum(ref saveFileBytes, RamChecksum.CalculateChecksum(saveFileBytes));
         }
     }
 }

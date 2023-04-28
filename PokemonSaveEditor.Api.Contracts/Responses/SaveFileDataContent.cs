@@ -2,7 +2,7 @@
 
 namespace PokemonSaveEditor.Api.Contracts.Responses
 {
-    public class SaveFileDataResponse
+    public class SaveFileDataContent
     {
         public string PlayerName { get; set; }
         public int Money { get; set; }

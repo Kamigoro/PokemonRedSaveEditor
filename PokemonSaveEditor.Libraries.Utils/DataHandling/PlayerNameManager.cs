@@ -3,16 +3,19 @@ using PokemonSaveEditor.Libraries.Text;
 
 namespace PokemonSaveEditor.Libraries.Utils.DataHandling
 {
+    /// <summary>
+    /// Provides functionality for setting and retrieving the player's name in a game save file.
+    /// </summary>
     public static class PlayerNameManager
     {
         /// <summary>
-        /// Change the player's name
+        /// Change the player's name in a save file.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="save"></param>
-        /// <returns>The save with the new player's name inside</returns>
-        /// <exception cref="ArgumentException">Name is empty or longer than 7 characters</exception>
-        public static byte[] SetPlayerName(byte[] save, string name)
+        /// <param name="save">The byte array representing the save file to modify.</param>
+        /// <param name="name">The new name to set for the player.</param>
+        /// <returns>The modified save file byte array with the new player's name inside.</returns>
+        /// <exception cref="ArgumentException">Thrown when the name is null or empty, or when the name is longer than 7 characters.</exception>
+        public static byte[] SetPlayerName(ref byte[] save, string name)
         {
             if(string.IsNullOrEmpty(name))
             {
@@ -34,10 +37,10 @@ namespace PokemonSaveEditor.Libraries.Utils.DataHandling
         }
 
         /// <summary>
-        /// Returns the player's name stored in save
+        /// Returns the player's name stored in a save file.
         /// </summary>
-        /// <param name="save"></param>
-        /// <returns>The player's name</returns>
+        /// <param name="save">The byte array representing the save file to read.</param>
+        /// <returns>The player's name as a string.</returns>
         public static string GetPlayerName(byte[] save)
         {
             byte[] nameByteArray = new byte[11];

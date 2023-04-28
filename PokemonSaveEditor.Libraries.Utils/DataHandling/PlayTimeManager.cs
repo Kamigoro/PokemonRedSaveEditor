@@ -12,7 +12,7 @@ namespace PokemonSaveEditor.Libraries.Utils.DataHandling
         /// <param name="minutes"></param>
         /// <returns>save with the newly set hours and minutes</returns>
         /// <exception cref="ArgumentOutOfRangeException">Hours is not between 0 and 255 or minutes are not between 0 and 59</exception>
-        public static byte[] SetPlayTime(byte[] save,int hours, int minutes)
+        public static byte[] SetPlayTime(ref byte[] save,int hours, int minutes)
         {
             if (hours < 0 || hours > 255)
             {

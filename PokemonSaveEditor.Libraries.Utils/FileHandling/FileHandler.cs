@@ -2,8 +2,18 @@
 
 namespace PokemonSaveEditor.Libraries.Utils
 {
+    /// <summary>
+    /// Validates that the byte array represents a valid save file for Pokemon Red.
+    /// </summary>
+    /// <param name="file">The byte array of the save file to validate.</param>
+    /// <returns>A tuple containing a bool indicating whether the file is valid and a string with an error message if the file is invalid.</returns>
     public static class FileHandler
     {
+        /// <summary>
+        /// Validates that the byte array represents a valid save file for Pokemon Red.
+        /// </summary>
+        /// <param name="file">The byte array of the save file to validate.</param>
+        /// <returns>A tuple containing a bool indicating whether the file is valid and a string with an error message if the file is invalid.</returns>
         public static (bool, string) ValidateSaveFile(byte[] file)
         {
             if (file.Length != 32768)
@@ -16,6 +26,12 @@ namespace PokemonSaveEditor.Libraries.Utils
             }
             return (true, string.Empty);
         }
+
+        /// <summary>
+        /// Validates that the IFormFile represents a valid save file for Pokemon Red.
+        /// </summary>
+        /// <param name="file">The IFormFile of the save file to validate.</param>
+        /// <returns>A tuple containing a bool indicating whether the file is valid and a string with an error message if the file is invalid.</returns>
         public static (bool, string) ValidateSaveFile(IFormFile file)
         {
             if (!file.FileName.EndsWith(".sav"))
@@ -28,6 +44,12 @@ namespace PokemonSaveEditor.Libraries.Utils
             }
             return (true, String.Empty);
         }
+
+        /// <summary>
+        /// Validates that the file at the specified path represents a valid save file for Pokemon Red.
+        /// </summary>
+        /// <param name="saveFilePath">The path to the save file to validate.</param>
+        /// <returns>A tuple containing a bool indicating whether the file is valid and a string with an error message if the file is invalid.</returns>
         public static (bool, string) ValidateSaveFile(string saveFilePath)
         {
             if (!saveFilePath.EndsWith(".sav"))
