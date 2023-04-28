@@ -15,6 +15,22 @@ namespace PokemonSaveEditor.Api.Controllers
     [ApiController]
     public class PokemonRedSaveFileController : ControllerBase
     {
+        [HttpPost]
+        [Route("test")]
+        public IActionResult Test(SaveFile saveFile)
+        {
+            //Extract bytes from save file content
+            var saveFileBytes = Convert.FromBase64String(saveFile.Content);
+
+            List<bool> seens= new List<bool>();
+            for (int i = 1; i < 152; i++)
+            {
+                seens.Add(PokemonSeenManager.IsSeen(saveFileBytes, i));
+            }
+
+            return Ok();
+        }
+
         /// <summary>
         /// Returns the data extracted from a Pokemon Red save file.
         /// </summary>
@@ -24,7 +40,7 @@ namespace PokemonSaveEditor.Api.Controllers
         public IActionResult GetSaveFileData(SaveFile saveFile)
         {
             //Extract bytes from save file content
-            var saveFileBytes = Encoding.UTF8.GetBytes(saveFile.Content);
+            var saveFileBytes = Convert.FromBase64String(saveFile.Content);
 
             //Checks on the save file
             var (success, errorMessage) = FileHandler.ValidateSaveFile(saveFileBytes);
@@ -49,11 +65,11 @@ namespace PokemonSaveEditor.Api.Controllers
         /// </summary>
         /// <param name="updateSaveFileRequest">The request object containing the save file and new data.</param>
         /// <returns>The updated save file.</returns>
-        [HttpPost]
+        [HttpPut]
         public IActionResult UpdateSaveFile(UpdateSaveFileRequest updateSaveFileRequest)
         {
             //Extract bytes from save file content
-            var saveFileBytes = Encoding.UTF8.GetBytes(updateSaveFileRequest.SaveFile.Content);
+            var saveFileBytes = Convert.FromBase64String(updateSaveFileRequest.SaveFile.Content);
 
             //Checks on the save file
             var (success, errorMessage) = FileHandler.ValidateSaveFile(saveFileBytes);
