@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PokemonSaveEditor.Api.Contracts.Extensions;
-using PokemonSaveEditor.Api.Contracts.Requests;
+using PokemonSaveEditor.Api.Contracts.Red.Extensions;
+using PokemonSaveEditor.Api.Contracts.Red.Requests;
 using PokemonSaveEditor.Api.Routes;
-using PokemonSaveEditor.Libraries.Utils;
-using PokemonSaveEditor.Libraries.Utils.DataHandling;
+using PokemonSaveEditor.Libraries.RamOffSet;
+using PokemonSaveEditor.Libraries.Utils.Red.DataHandling;
+using PokemonSaveEditor.Libraries.Utils.Red.FileHandling;
+using PokemonSaveEditor.Libraries.Utils.Red.RamHandling;
 using System.Text;
 
 namespace PokemonSaveEditor.Api.Controllers
@@ -22,13 +24,14 @@ namespace PokemonSaveEditor.Api.Controllers
             //Extract bytes from save file content
             var saveFileBytes = Convert.FromBase64String(saveFile.Content);
 
-            List<bool> seens= new List<bool>();
-            for (int i = 1; i < 152; i++)
+            for (int pokemonNumber = 1; pokemonNumber < 100; pokemonNumber++)
             {
-                seens.Add(PokemonSeenManager.IsSeen(saveFileBytes, i));
+                PokemonSeenManager.SetSightState(ref saveFileBytes, pokemonNumber);
+                PokemonOwnedManager.SetOwnedState(ref saveFileBytes, pokemonNumber);
             }
 
-            return Ok();
+            RamChecksum.SetRamCheckSum(ref saveFileBytes, RamChecksum.CalculateChecksum(saveFileBytes));
+            return File(saveFileBytes, "application/octet-stream", saveFile.Name);
         }
 
         /// <summary>
@@ -91,7 +94,7 @@ namespace PokemonSaveEditor.Api.Controllers
         private static void SetNewFileData(UpdateSaveFileRequest updateSaveFileRequest, ref byte[] saveFileBytes)
         {
             BadgesManager.SetBadgesCollection(ref saveFileBytes, updateSaveFileRequest.NewData.Badges);
-            PlayerNameManager.SetPlayerName(ref saveFileBytes, updateSaveFileRequest.NewData.PlayerName);
+            NameManager.SetPlayerName(ref saveFileBytes, updateSaveFileRequest.NewData.PlayerName);
             PlayTimeManager.SetPlayTime(ref saveFileBytes, updateSaveFileRequest.NewData.Hours, updateSaveFileRequest.NewData.Minutes);
             MoneyManager.SetMoney(ref saveFileBytes, updateSaveFileRequest.NewData.Money);
             RamChecksum.SetRamCheckSum(ref saveFileBytes, RamChecksum.CalculateChecksum(saveFileBytes));
