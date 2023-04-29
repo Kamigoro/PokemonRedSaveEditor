@@ -1,5 +1,5 @@
-﻿using PokemonSaveEditor.Libraries.Red.Models;
-using PokemonSaveEditor.Libraries.Red.RamOffSet;
+﻿using PokemonSaveEditor.Libraries.Utils.Red.Models;
+using PokemonSaveEditor.Libraries.Utils.Red.RamOffSet;
 
 namespace PokemonSaveEditor.Libraries.Utils.Red.DataHandling
 {

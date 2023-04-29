@@ -2,11 +2,9 @@
 using PokemonSaveEditor.Api.Contracts.Red.Extensions;
 using PokemonSaveEditor.Api.Contracts.Red.Requests;
 using PokemonSaveEditor.Api.Routes;
-using PokemonSaveEditor.Libraries.RamOffSet;
 using PokemonSaveEditor.Libraries.Utils.Red.DataHandling;
 using PokemonSaveEditor.Libraries.Utils.Red.FileHandling;
 using PokemonSaveEditor.Libraries.Utils.Red.RamHandling;
-using System.Text;
 
 namespace PokemonSaveEditor.Api.Controllers
 {

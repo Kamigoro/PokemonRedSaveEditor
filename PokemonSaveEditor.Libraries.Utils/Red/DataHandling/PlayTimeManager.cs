@@ -1,4 +1,4 @@
-﻿using PokemonSaveEditor.Libraries.Red.RamOffSet.PlayTime;
+﻿using PokemonSaveEditor.Libraries.Utils.Red.RamOffSet.PlayTime;
 
 namespace PokemonSaveEditor.Libraries.Utils.Red.DataHandling
 {

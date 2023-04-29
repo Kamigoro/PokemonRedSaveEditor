@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PokemonSaveEditor.Libraries.Utils\PokemonSaveEditor.Libraries.Utils.csproj" />
-    <ProjectReference Include="..\PokemonSaveEditor.Libraries\PokemonSaveEditor.Libraries.csproj" />
   </ItemGroup>
 
 </Project>

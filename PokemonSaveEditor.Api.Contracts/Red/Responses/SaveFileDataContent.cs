@@ -1,4 +1,4 @@
-﻿using PokemonSaveEditor.Libraries.Red.Models;
+﻿using PokemonSaveEditor.Libraries.Utils.Red.Models;
 
 namespace PokemonSaveEditor.Api.Contracts.Red.Responses
 {

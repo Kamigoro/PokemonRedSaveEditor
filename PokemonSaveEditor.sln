@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonSaveEditor.Libraries.Utils", "PokemonSaveEditor.Libraries.Utils\PokemonSaveEditor.Libraries.Utils.csproj", "{248AC5C2-4FEE-43D2-84DA-C33335F1ECF1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonSaveEditor.Libraries", "PokemonSaveEditor.Libraries\PokemonSaveEditor.Libraries.csproj", "{5737BCE4-E651-4F63-8DF5-BF6DFC0D8B4E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonSaveEditor.Api", "PokemonSaveEditor.Api\PokemonSaveEditor.Api.csproj", "{5BC1BCCF-807B-4968-BC7D-D0F121885A41}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonSaveEditor.Api.Contracts", "PokemonSaveEditor.Api.Contracts\PokemonSaveEditor.Api.Contracts.csproj", "{601489CF-2276-4E97-A899-02D0186185C1}"
@@ -16,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperConsoleApp", "HelperConsoleApp\HelperConsoleApp.csproj", "{31AEB5D4-4A4E-469A-BB6E-834B0DE9FE6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperConsoleApp", "HelperConsoleApp\HelperConsoleApp.csproj", "{31AEB5D4-4A4E-469A-BB6E-834B0DE9FE6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,10 +26,6 @@ Global
 		{248AC5C2-4FEE-43D2-84DA-C33335F1ECF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{248AC5C2-4FEE-43D2-84DA-C33335F1ECF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{248AC5C2-4FEE-43D2-84DA-C33335F1ECF1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5737BCE4-E651-4F63-8DF5-BF6DFC0D8B4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5737BCE4-E651-4F63-8DF5-BF6DFC0D8B4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5737BCE4-E651-4F63-8DF5-BF6DFC0D8B4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5737BCE4-E651-4F63-8DF5-BF6DFC0D8B4E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5BC1BCCF-807B-4968-BC7D-D0F121885A41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5BC1BCCF-807B-4968-BC7D-D0F121885A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BC1BCCF-807B-4968-BC7D-D0F121885A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
